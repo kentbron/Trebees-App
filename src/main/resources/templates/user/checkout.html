@@ -90,12 +90,14 @@
         e.preventDefault();
         const total = updateTotal();
 
+        //Changes Made by : Hubert Harold P. Plarisan
+        // Spelling Correction
         // BLOCK if user has no funds OR total exceeds balance
         if (balance <= 0 || total > balance) {
           Swal.fire({
             icon: 'error',
-            title: 'inefficient balance',
-            text:  'inefficient balance'
+            title: 'insufficient balance',   
+            text:  'insufficient balance'
           });
           return;
         }
