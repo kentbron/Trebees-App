@@ -1,0 +1,25 @@
+	/* Add to your existing style.css */
+	.error {
+	    color: #f44336;
+	    margin-bottom: 15px;
+	    padding: 10px;
+	    background-color: #ffebee;
+	    border-radius: 4px;
+	}
+	
+	.success {
+	    color: #4CAF50;
+	    margin-bottom: 15px;
+	    padding: 10px;
+	    background-color: #e8f5e9;
+	    border-radius: 4px;
+	}
+	
+	.auth-container {
+	    max-width: 400px;
+	    margin: 0 auto;
+	    padding: 20px;
+	    border: 1px solid #ddd;
+	    border-radius: 5px;
+	    background-color: #fff;
+	}

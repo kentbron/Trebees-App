@@ -1,0 +1,47 @@
+/* Registration Page Specific Styles */
+.toggle-password {
+    cursor: pointer;
+}
+
+.input-group-text {
+    background-color: #f8f9fa;
+    border-right: none;
+}
+
+.form-control {
+    border-left: none;
+}
+
+/* Password strength indicator */
+.password-strength {
+    height: 5px;
+    margin-top: 5px;
+    background-color: #e9ecef;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.strength-0 {
+    width: 20%;
+    background-color: #dc3545;
+}
+
+.strength-1 {
+    width: 40%;
+    background-color: #fd7e14;
+}
+
+.strength-2 {
+    width: 60%;
+    background-color: #ffc107;
+}
+
+.strength-3 {
+    width: 80%;
+    background-color: #28a745;
+}
+
+.strength-4 {
+    width: 100%;
+    background-color: #20c997;
+}

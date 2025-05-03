@@ -1,0 +1,59 @@
+	<!DOCTYPE html>
+	<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+	    <meta charset="UTF-8">
+	    <title>Request Top-up and History - Trebees Cafe</title>
+	    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	</head>
+	<body>
+	
+	<div class="container mt-5">
+	    <h2 class="mb-4">📥 Request a Top-up</h2>
+	
+	    <div class="card mb-5">
+	        <div class="card-body">
+	            <form th:action="@{/user/topup}" method="post" class="row g-3">
+	                <div class="col-md-6">
+	                    <input type="number" min="1" step="0.01" class="form-control" placeholder="Amount in ₱"
+	                           th:field="*{newTopup.money}" required>
+	                </div>
+	                <div class="col-md-4">
+	                    <button type="submit" class="btn btn-success w-100">Submit Request</button>
+	                </div>
+	            </form>
+	        </div>
+	    </div>
+	
+	    <h3 class="mb-3">📄 Top-up History</h3>
+	
+	    <div class="card">
+	        <div class="card-body">
+	            <table class="table table-bordered">
+	                <thead>
+	                <tr>
+	                    <th>Amount</th>
+	                    <th>Status</th>
+	                </tr>
+	                </thead>
+	                <tbody>
+	                <tr th:each="t : ${topups}">
+	                    <td>₱<span th:text="${t.money}">0.00</span></td>
+	                    <td>
+	                        <span class="badge text-bg-secondary" th:if="${t.status == 'PENDING'}">Pending</span>
+	                        <span class="badge text-bg-success" th:if="${t.status == 'APPROVED'}">Approved</span>
+	                        <span class="badge text-bg-danger" th:if="${t.status == 'DECLINED'}">Declined</span>
+	                    </td>
+	                </tr>
+	                </tbody>
+	            </table>
+	        </div>
+	    </div>
+	
+	    <div class="mt-4">
+	        <a href="/user/dashboard" class="btn btn-outline-primary">← Back to Dashboard</a>
+	    </div>
+	</div>
+	
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	</body>
+	</html>
