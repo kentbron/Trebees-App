@@ -1,5 +1,6 @@
 package com.trebees.cafe.controller;
 
+
 import com.trebees.cafe.model.BankAccount;
 import com.trebees.cafe.model.CustomerAccount;
 import com.trebees.cafe.model.Order;
@@ -44,6 +45,8 @@ public class AdminOrderController {
                 .sorted((a, b) -> Long.compare(a.getBank_id(), b.getBank_id()))
                 .toList();
 
+            //Code by: Rigil Kent P. Payo
+            //Improved texts in Controller
             for (BankAccount topup : topups) {
                 double available = topup.getMoney();
                 if (available >= price) {
@@ -51,14 +54,14 @@ public class AdminOrderController {
                     bankAccountService.save(topup);
                     order.setStatus("Approved");
                     orderService.save(order);
-                    redirectAttributes.addFlashAttribute("success", "Order approved successfully!");
+                    redirectAttributes.addFlashAttribute("success", "✅ Order approved. Payment has been successfully processed.");
                     return;
                 }
             }
 
             order.setStatus("Declined");
             orderService.save(order);
-            redirectAttributes.addFlashAttribute("success", "Order declined (Insufficient funds).");
+            redirectAttributes.addFlashAttribute("error", "⚠️ Order declined. The customer does not have enough funds.");
         });
         return "redirect:/admin/orders";
     }
@@ -68,7 +71,7 @@ public class AdminOrderController {
         orderService.findById(id).ifPresent(order -> {
             order.setStatus("Declined");
             orderService.save(order);
-            redirectAttributes.addFlashAttribute("success", "Order declined successfully!");
+            redirectAttributes.addFlashAttribute("success", "✅ Order has been declined successfully.");
         });
         return "redirect:/admin/orders";
     }
@@ -78,7 +81,7 @@ public class AdminOrderController {
         List<Order> pendingOrders = orderService.findAllPendingOrdersByCustomer(customerId);
 
         if (pendingOrders.isEmpty()) {
-            redirectAttributes.addFlashAttribute("error", "No pending orders found for this customer.");
+        	redirectAttributes.addFlashAttribute("info", "ℹ️ This customer has no pending orders to approve.");
             return "redirect:/admin/orders";
         }
 
@@ -139,7 +142,7 @@ public class AdminOrderController {
     @GetMapping("/declineAll/{customerId}")
     public String declineAllOrders(@PathVariable Long customerId, RedirectAttributes redirectAttributes) {
         orderService.declineAllOrdersByCustomer(customerId);
-        redirectAttributes.addFlashAttribute("success", "All orders declined successfully!");
+        redirectAttributes.addFlashAttribute("success", "✅ All pending orders for this customer have been declined.");
         return "redirect:/admin/orders";
     }
 }
